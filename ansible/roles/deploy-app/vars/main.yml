@@ -1,0 +1,3 @@
+---
+app: flask-app
+image: flask-app

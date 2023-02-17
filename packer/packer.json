@@ -1,0 +1,37 @@
+{
+    "builders": [
+      {
+        "type": "googlecompute",
+        "account_file": "../equifax-test-377917-297fc08ac957.json",
+        "project_id": "equifax-test-377917",
+        "source_image": "ubuntu-minimal-2004-focal-arm64-v20230216",
+        "image_name" : "flask-app",
+        "ssh_username": "packer",
+        "zone": "us-central1-a"
+      }
+    ],
+    "provisioners": [
+        {
+            "type": "file",
+            "source": "../python-service/requirements.txt",
+            "destination": "requirements.txt"
+        },
+        {
+            "type": "file",
+            "source": "../python-service/api/main.py",
+            "destination": "api/main.py"
+        },
+        {
+            "type": "shell",
+            "inline": [
+                "sudo apt update",
+                "sudo apt install python3-pip",
+                "python3 -m venv venv",
+                "source venv/bin/activate",
+                "pip3 install -r requirements.txt",
+                "flask run --host 0.0.0.0 --port 80"
+            ]
+        }
+    ]
+}
+  

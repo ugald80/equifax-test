@@ -1,0 +1,19 @@
+---
+- name: deploy application
+  hosts: all
+  gather_facts: no
+
+  vars:
+    gcp_project: equifax-test-377917
+    gcp_cred_kind: serviceaccount
+    gcp_cred_file: ../equifax-test-377917-297fc08ac957.json
+    gcp_zone: us-central1-a
+    gcp_region: us-central1
+    network: default
+    subnet: default
+
+  environment:
+    GOOGLE_CREDENTIALS: ../equifax-test-377917-297fc08ac957.json
+
+  roles:
+    - deploy-app

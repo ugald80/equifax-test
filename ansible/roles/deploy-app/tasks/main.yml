@@ -1,0 +1,28 @@
+---
+- name: Create a k8s namespace
+  kubernetes.core.k8s:
+    state: present
+    definition:
+      apiVersion: v1
+      kind: Namespace
+      metadata:
+        name: "{{ namespace }}"
+        labels:
+          app: "{{ namespace }}"
+
+- name: Create k8s pod for python
+  kubernetes.core.k8s:
+    state: present
+    definition:
+      apiVersion: v1
+      kind: Pod
+      metadata:
+        name: "{{ app }}"
+        namespace: "{{ namespace }}"
+        labels:
+          app: "{{ app }}"
+      spec:
+        containers:
+          - name: "{{ app }}"
+            image: "{{ image }}"
+            imagePullPolicy: Always
