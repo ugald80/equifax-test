@@ -2,11 +2,12 @@
     "builders": [
       {
         "type": "googlecompute",
-        "account_file": "../equifax-test-377917-297fc08ac957.json",
+        "account_file": "../google-credentials.json",
         "project_id": "equifax-test-377917",
         "source_image": "ubuntu-minimal-2004-focal-arm64-v20230216",
         "image_name" : "flask-app",
-        "ssh_username": "packer",
+        "ssh_username": "jonathan_ugalde",
+        "ssh_timeout": "20m",
         "zone": "us-central1-a"
       }
     ],

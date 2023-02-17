@@ -9,5 +9,5 @@ variable "db_password" {
 }
 variable "google_credentials_file" {
   type = string
-  default = "../equifax-test-377917-297fc08ac957.json"
+  default = "../google-credentials.json"
 }
