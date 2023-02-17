@@ -1,18 +1,24 @@
 resource "google_container_cluster" "primary" {
-  name     = "${var.projectID}-gke-cluster"
+  name     = "${var.project_alias}-gke-cluster"
   location = "us-central1-a"
 
   remove_default_node_pool = true
   initial_node_count = 1
+
   dns_config {
     cluster_dns = "CLOUD_DNS"
-    cluster_dns_scope = "VPC_SCOPE"
-    cluster_dns_domain = var.projectID
+    cluster_dns_scope = "CLUSTER_SCOPE"
+    cluster_dns_domain = var.project_alias
+  }
+  master_auth {
+    client_certificate_config {
+      issue_client_certificate = true
+    }
   }
 }
 
 resource "google_container_node_pool" "primary_preemptible_nodes" {
-  name       = "${var.projectID}-pool"
+  name       = "${var.project_alias}-pool"
   location   = "us-central1-a"
   cluster    = google_container_cluster.primary.name
   node_count = 3

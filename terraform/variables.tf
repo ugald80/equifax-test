@@ -1,6 +1,10 @@
-variable "projectID" {
+variable "project_alias" {
   type = string
   default = "equifax-test"
+}
+variable "project_id" {
+  type = string
+  default = "equifax-test-377917"
 }
 //TODO: following variables must be provided using secret manager
 variable "db_password" {

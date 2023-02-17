@@ -1,17 +1,17 @@
 resource "google_compute_instance" "bastion" {
-  name         = "${var.projectID}-bastion"
+  name         = "${var.project_alias}-bastion"
   machine_type = "e2-standard-2"
   zone         = "us-central1-a"
   count        = 1
 
   allow_stopping_for_update = true
-  tags = [var.projectID]
+  tags = [var.project_alias]
 
   boot_disk {
     initialize_params {
       image = "debian-cloud/debian-11"
       labels = {
-        project = var.projectID
+        project = var.project_alias
       }
     }
   }

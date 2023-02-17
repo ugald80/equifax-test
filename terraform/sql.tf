@@ -3,7 +3,7 @@ resource "random_id" "db_name_suffix" {
 }
 
 resource "google_sql_database_instance" "db_instance" {
-  name             = "${var.projectID}-db-instance-${random_id.db_name_suffix.hex}"
+  name             = "${var.project_alias}-db-instance-${random_id.db_name_suffix.hex}"
   region           = "us-central1"
   database_version = "POSTGRES_14"
   deletion_protection = false
@@ -31,11 +31,11 @@ resource "google_sql_database_instance" "db_instance" {
 }
 
 resource "google_sql_database" "database" {
-  name     = "${var.projectID}-database"
+  name     = "${var.project_alias}-database"
   instance = google_sql_database_instance.db_instance.name
 }
 resource "google_sql_user" "users" {
-  name     = var.projectID
+  name     = var.project_alias
   instance = google_sql_database_instance.db_instance.name
   password = var.db_password
 }
