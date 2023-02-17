@@ -44,6 +44,7 @@ This app has junt one method (GET at port 80), which retrieves a list of songs
 - packer build -force packer.json
 
 ### 4. Deploy image in kubernetes with Ansible
+- cd ../ansible
 - ansible-playbook -i inventory deployment.yml
 
 ### 5. Implement an ISTIO service mesh with Terraform
